@@ -47,10 +47,21 @@ function convertCurrency(amount, price, symbol) {
     description.textContent = `1 ${symbol} = R$ ${formatCurrencyBRL(price)}`;
 
     // Calcula o total.
+
+    // Opção 1 para trocar o ponto por vírgula:
+    // let total = String(amount * price).replace(".", ",");
+
     let total = amount * price;
 
+    // Verifica se o resultado não é um número.
+    if (isNaN(total)) {
+      return alert("Por favor, digite o valor corretamente para converter!");
+    }
+    // Opção 2 para trocar o ponto por vírgula:
+    total = formatCurrencyBRL(total).replace("R$", "");
+
     // Exibe o resultado total.
-    result.textContent = total;
+    result.textContent = `${total} Reais`;
 
     // Aplica a classe que exibe o footer para mostrar o resultado.
     footer.classList.add("show-result");
